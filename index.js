@@ -1,10 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser"; // The bodyParser comes with Express, and it allows us to take in the incoming POST request body.
+import userRoutes from "./routes/users.js";
 
 const app = express(); // we created an app using the express object.
 const PORT = 5000;
 
 app.use(bodyParser.json()); // TODO json 말고 다른 건 뭐?
+app.use("/users", userRoutes);
 
 // GET
 app.get("/", (req, res) => {
