@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const router = express.Router(); // creates a fresh router instance, stored in the variable router.
 
-const users = [];
+let users = []; // should use 'let' to assign new array in delete method
 
 // GET
 router.get("/", (req, res) => {
@@ -32,4 +32,12 @@ router.post("/", (req, res) => {
   res.send(`${user.first_name} has been added to the Database`);
 });
 
+// DELETE :id
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+
+  users = users.filter((user) => user.id !== id); // to create a new array that excludes the user with the matching ID (id)
+
+  res.send(`${id} deleted successfully from database`);
+});
 export default router;
