@@ -32,6 +32,23 @@ router.post("/", (req, res) => {
   res.send(`${user.first_name} has been added to the Database`);
 });
 
+// PATCH
+router.patch("/:id", (req, res) => {
+  const { id } = req.params;
+
+  const { first_name, last_name, email } = req.body;
+
+  const user = users.find((user) => user.id === id);
+
+  // checked if first_name, last_name, or email properties exist in req.body.
+  // If they do, we can update the corresponding properties of the user object with the new values. This allows us to make selective changes to the user's data without affecting other attributes.
+  if (first_name) user.first_name = first_name;
+  if (last_name) user.last_name = last_name;
+  if (email) user.email = email;
+
+  res.send(`User with the ${id} has been updated`);
+});
+
 // DELETE :id
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
